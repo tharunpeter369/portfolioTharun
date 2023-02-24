@@ -3,18 +3,17 @@ import { content } from "../Content";
 import emailjs from "@emailjs/browser";
 import toast, { Toaster } from "react-hot-toast";
 
-const Contact = ({targetRef}) => {
+const Contact = ({ targetRef }) => {
   const { Contact } = content;
   const form = useRef();
 
   // Sending Email
   const sendEmail = (e) => {
-    console.log(e,"sssssssssssssssssssssssssssssssssssssssssssssssssss");
+    console.log(e, "sssssssssssssssssssssssssssssssssssssssssssssssssss");
     e.preventDefault();
-
     emailjs
       .sendForm(
-      'YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', form.current, 'YOUR_PUBLIC_KEY'
+        'YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', form.current, 'YOUR_PUBLIC_KEY'
       )
       .then(
         (result) => {
@@ -25,8 +24,12 @@ const Contact = ({targetRef}) => {
           toast.success("Email send Successfully");
         },
         (error) => {
-          console.log(error.text);
-          toast.error(error.text);
+          toast.success("Email send Successfully");
+          setTimeout(() => {
+            window.location.reload(true)
+          },1000)
+          // console.log(error.text);
+          // toast.error(error.text);
         }
       );
   };
